@@ -1,13 +1,16 @@
 const db = require('../models')
 const Product = db.products
 const Review = db.reviews
+const multer = require('multer')
+const path = require('path')
     //1. create Product 
 const addProduct = async(req, res) => {
     let info = {
+        image: req.file.path,
         title: req.body.title,
         price: req.body.price,
         description: req.body.description,
-        published: req.body.published
+        published: req.body.published ? req.body.published: false
     }
     const product = await Product.create(info)
     res.status(200).send(product)
@@ -71,6 +74,31 @@ const getProductReviews = async(req, res) => {
 }
 
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'Images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: '1000000' },
+    fileFilter: (req, file, cb) => {
+        const fileTypes = /jpeg|jpg|png|gif|webp/
+        const mimeType = fileTypes.test(file.mimetype)
+        const extname = fileTypes.test(path.extname(file.originalname))
+
+        if(mimeType && extname) {
+            return cb(null, true)
+        }
+        cb('Give proper files formate to upload')
+    }
+}).single('image')
+
+
 module.exports = {
     addProduct,
     getAllProducts,
@@ -78,5 +106,6 @@ module.exports = {
     upadateProduct,
     deleteProduct,
     publishedProduct,
-    getProductReviews
+    getProductReviews,
+    upload,
 }

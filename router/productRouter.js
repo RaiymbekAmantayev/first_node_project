@@ -6,7 +6,7 @@ const reviewController = require('../controllers/reviewController.js')
 const router = require('express').Router()
 
 // use routers
-router.post('/addProduct', productController.addProduct)
+router.post('/addProduct', productController.upload , productController.addProduct)
 router.get('/getAllProduct', productController.getAllProducts)
 router.get('/published', productController.publishedProduct)
 
@@ -25,7 +25,7 @@ router.get('/getProdRev/:id', productController.getProductReviews)
 // Product router
 router.get('/:id', productController.getOneProduct)
 
-router.put('/:id', productController.upadateProduct)
+router.put('/:id', productController.upload, productController.upadateProduct)
 
 router.delete('/:id', productController.deleteProduct)
 
