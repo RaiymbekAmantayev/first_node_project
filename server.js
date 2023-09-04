@@ -360,6 +360,42 @@
 
 
 // }
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const db = require('./config/dbconfig.js'); // Import your database configuration
+// const app = express();
+// const PORT = process.env.PORT || 8080;
+//
+// // Middleware
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+//
+// // Import your route handlers
+// const router = require('./router/productRouter.js')
+// // app.use('/api/products', router)
+//
+// // Start the server
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+// app.js или index.js
+// const express = require('express');
+// const productRouter = require('./router/productRouter');
+// // const reviewRoutes = require('./routes/reviewRoutes');
+
+// const app = express();
+
+// app.use('/products', productRouter);
+// // app.use('/reviews', reviewRoutes);
+
+// // Добавьте другие настройки вашего Express приложения
+
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
 const express = require('express')
 const cors = require('cors')
 

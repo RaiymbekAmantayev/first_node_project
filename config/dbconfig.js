@@ -1,14 +1,14 @@
-module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: '',
-    DB: "node.js",
-    dialect: "mysql",
+// db.js
+const mysql = require('mysql2/promise');
 
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-}
+const dbConfig = {
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'node.js'
+};
+
+const pool = mysql.createPool(dbConfig);
+
+module.exports = pool;
+
